@@ -1,0 +1,113 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Proyecto_Blazor\\BlazorZAPIpura\\TelerikBlazorOE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BCF40EBC-73BF-443D-8EBC-EB3F557BADCD}|BlazorOE01.csproj|c:\\proyecto_blazor\\blazorzapipura\\telerikblazoroe\\layout\\cultureselector.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BCF40EBC-73BF-443D-8EBC-EB3F557BADCD}|BlazorOE01.csproj|solutionrelative:layout\\cultureselector.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCF40EBC-73BF-443D-8EBC-EB3F557BADCD}|BlazorOE01.csproj|c:\\proyecto_blazor\\blazorzapipura\\telerikblazoroe\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BCF40EBC-73BF-443D-8EBC-EB3F557BADCD}|BlazorOE01.csproj|solutionrelative:layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCF40EBC-73BF-443D-8EBC-EB3F557BADCD}|BlazorOE01.csproj|c:\\proyecto_blazor\\blazorzapipura\\telerikblazoroe\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BCF40EBC-73BF-443D-8EBC-EB3F557BADCD}|BlazorOE01.csproj|solutionrelative:layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCF40EBC-73BF-443D-8EBC-EB3F557BADCD}|BlazorOE01.csproj|c:\\proyecto_blazor\\blazorzapipura\\telerikblazoroe\\layout\\loginlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BCF40EBC-73BF-443D-8EBC-EB3F557BADCD}|BlazorOE01.csproj|solutionrelative:layout\\loginlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BCF40EBC-73BF-443D-8EBC-EB3F557BADCD}|BlazorOE01.csproj|c:\\proyecto_blazor\\blazorzapipura\\telerikblazoroe\\login\\loginpage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BCF40EBC-73BF-443D-8EBC-EB3F557BADCD}|BlazorOE01.csproj|solutionrelative:login\\loginpage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:141133141:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CultureSelector.razor",
+              "DocumentMoniker": "C:\\Proyecto_Blazor\\BlazorZAPIpura\\TelerikBlazorOE\\Layout\\CultureSelector.razor",
+              "RelativeDocumentMoniker": "Layout\\CultureSelector.razor",
+              "ToolTip": "C:\\Proyecto_Blazor\\BlazorZAPIpura\\TelerikBlazorOE\\Layout\\CultureSelector.razor",
+              "RelativeToolTip": "Layout\\CultureSelector.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-02T17:23:12.355Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "C:\\Proyecto_Blazor\\BlazorZAPIpura\\TelerikBlazorOE\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "Layout\\MainLayout.razor",
+              "ToolTip": "C:\\Proyecto_Blazor\\BlazorZAPIpura\\TelerikBlazorOE\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "Layout\\MainLayout.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-02T17:23:10.325Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "C:\\Proyecto_Blazor\\BlazorZAPIpura\\TelerikBlazorOE\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "Layout\\NavMenu.razor",
+              "ToolTip": "C:\\Proyecto_Blazor\\BlazorZAPIpura\\TelerikBlazorOE\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "Layout\\NavMenu.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-02T17:23:09.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginLayout.razor",
+              "DocumentMoniker": "C:\\Proyecto_Blazor\\BlazorZAPIpura\\TelerikBlazorOE\\Layout\\LoginLayout.razor",
+              "RelativeDocumentMoniker": "Layout\\LoginLayout.razor",
+              "ToolTip": "C:\\Proyecto_Blazor\\BlazorZAPIpura\\TelerikBlazorOE\\Layout\\LoginLayout.razor",
+              "RelativeToolTip": "Layout\\LoginLayout.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-02T17:23:07.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoginPage.razor",
+              "DocumentMoniker": "C:\\Proyecto_Blazor\\BlazorZAPIpura\\TelerikBlazorOE\\Login\\LoginPage.razor",
+              "RelativeDocumentMoniker": "Login\\LoginPage.razor",
+              "ToolTip": "C:\\Proyecto_Blazor\\BlazorZAPIpura\\TelerikBlazorOE\\Login\\LoginPage.razor",
+              "RelativeToolTip": "Login\\LoginPage.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-02T17:22:59.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
