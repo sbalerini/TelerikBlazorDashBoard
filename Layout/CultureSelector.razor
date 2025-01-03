@@ -49,25 +49,23 @@
         public string Text { get; set; }
     }
 
-    // List of Supported Cultures
-    private List<CultureOption> CultureOptions => SupportedCultures
-        .Select(c => new CultureOption { Code = c.Name, DisplayText = c.DisplayName })
-        .ToList();
+    private string SelectedTheme { get; set; } = "kendo-theme-default/all";
 
-    private CultureInfo[] SupportedCultures = new[]
+    // List of Supported Cultures with Custom Display Names
+    private List<CultureOption> CultureOptions => new()
     {
-        new CultureInfo("en-US"),
-        new CultureInfo("bg-BG"),
-        new CultureInfo("fr-FR"),
-        new CultureInfo("it-IT"),
-        new CultureInfo("es-ES"),
+        new CultureOption { Code = "en-US", DisplayText = "USA" },
+        new CultureOption { Code = "bg-BG", DisplayText = "Bulgarian" },
+        new CultureOption { Code = "fr-FR", DisplayText = "France" },
+        new CultureOption { Code = "it-IT", DisplayText = "Italian" },
+        new CultureOption { Code = "es-ES", DisplayText = "Spanish" },
     };
 
-    private CultureInfo? SelectedCulture;
+    private string SelectedCultureCode { get; set; } = CultureInfo.CurrentCulture.Name;
 
     protected override void OnInitialized()
     {
-        SelectedCulture = CultureInfo.CurrentCulture;
+        SelectedCultureCode = CultureInfo.CurrentCulture.Name;
     }
 
     private async Task ApplySelectedCultureAsync(string selectedCode)
@@ -76,8 +74,7 @@
 
         if (selectedCulture != null && CultureInfo.CurrentCulture != selectedCulture)
         {
-            SelectedCulture = selectedCulture;
-            await JS.InvokeVoidAsync("blazorCulture.set", SelectedCulture.Name);
+            await JS.InvokeVoidAsync("blazorCulture.set", selectedCode);
             Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
         }
     }
@@ -90,6 +87,15 @@
             await themeLink.InvokeVoidAsync("setAttribute", "href", $"_content/Telerik.UI.for.Blazor.Trial/css/{selectedValue}.css");
         }
     }
+
+    private CultureInfo[] SupportedCultures = new[]
+    {
+        new CultureInfo("en-US"),
+        new CultureInfo("bg-BG"),
+        new CultureInfo("fr-FR"),
+        new CultureInfo("it-IT"),
+        new CultureInfo("es-ES"),
+    };
 
     private class CultureOption
     {
