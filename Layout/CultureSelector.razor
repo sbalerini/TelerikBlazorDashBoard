@@ -1,24 +1,62 @@
-﻿@using System.Globalization
+﻿﻿@using System.Globalization
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
 
+<link id="theme-link" href="_content/Telerik.UI.for.Blazor.Trial/css/kendo-theme-default/all.css" rel="stylesheet" />
+
+<!-- Swatch Selector -->
+<div class="">
+    <label style="color:blue">
+        Select Theme:
+
+    </label>
+    <div>
+        <TelerikComboBox Data="@Swatches"
+                         ValueField="Value"
+                         TextField="Text"
+                         Placeholder="Select a theme..."
+                         ValueChanged="@(async (string value) => await ChangeSwatchAsync(value))" />
+     </div>
+</div>
+<!-- Locale Selector -->
+<div>
 <label style="color:red">
     Select your locale:
-    <select @bind="@SelectedCulture" @bind:after="@( async () => await ApplySelectedCultureAsync() )">
+    <select  @bind="@SelectedCulture"  @bind:after="@( async () => await ApplySelectedCultureAsync() )">
         @foreach (var culture in SupportedCultures)
         {
             <option value="@culture">@culture.DisplayName</option>
         }
     </select>
 </label>
+</div>
+
 
 @code {
-    private CultureInfo[] SupportedCultures = new[]
+    // List of available Swatches
+    private List<SwatchOption> Swatches = new()
     {
+        new SwatchOption { Value = "kendo-theme-default/all", Text = "Default" },
+        new SwatchOption { Value = "kendo-theme-default/default-ocean-blue", Text = "Default Ocean Blue" },
+        new SwatchOption { Value = "kendo-theme-material/all", Text = "Material" },
+        new SwatchOption { Value = "kendo-theme-fluent/all", Text = "Fluent" },
+        new SwatchOption { Value = "green", Text = "Green" },
+    };
+
+    private class SwatchOption
+    {
+        public string Value { get; set; }
+        public string Text { get; set; }
+    }
+
+    // List of Supported Cultures
+    private CultureInfo[] SupportedCultures = new[]
+     {
         new CultureInfo("en-US"),
         new CultureInfo("bg-BG"),
         new CultureInfo("fr-FR"),
         new CultureInfo("it-IT"),
+         new CultureInfo("es-ES"),
 
     };
 
@@ -32,11 +70,27 @@
 
     private async Task ApplySelectedCultureAsync()
     {
+
         if (SelectedCulture != null && CultureInfo.CurrentCulture != SelectedCulture)
         {
             await JS.InvokeVoidAsync("blazorCulture.set", SelectedCulture.Name);
 
             Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
         }
+    }
+
+    private async Task ChangeSwatchAsync(string selectedValue)
+    {
+        var themeLink = await JS.InvokeAsync<IJSObjectReference>("getThemeLink");
+        if (themeLink != null)
+        {
+            await themeLink.InvokeVoidAsync("setAttribute", "href", $"_content/Telerik.UI.for.Blazor.Trial/css/{selectedValue}.css");
+        }
+    }
+
+    private class CultureOption
+    {
+        public string Code { get; set; }
+        public string DisplayText { get; set; }
     }
 }
