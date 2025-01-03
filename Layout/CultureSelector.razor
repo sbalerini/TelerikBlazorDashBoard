@@ -1,14 +1,13 @@
-﻿﻿@using System.Globalization
+﻿@using System.Globalization
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
 
 <link id="theme-link" href="_content/Telerik.UI.for.Blazor.Trial/css/kendo-theme-default/all.css" rel="stylesheet" />
 
 <!-- Swatch Selector -->
-<div class="">
+<div>
     <label style="color:blue">
         Select Theme:
-
     </label>
     <div>
         <TelerikComboBox Data="@Swatches"
@@ -16,21 +15,22 @@
                          TextField="Text"
                          Placeholder="Select a theme..."
                          ValueChanged="@(async (string value) => await ChangeSwatchAsync(value))" />
-     </div>
-</div>
-<!-- Locale Selector -->
-<div>
-<label style="color:red">
-    Select your locale:
-    <select  @bind="@SelectedCulture"  @bind:after="@( async () => await ApplySelectedCultureAsync() )">
-        @foreach (var culture in SupportedCultures)
-        {
-            <option value="@culture">@culture.DisplayName</option>
-        }
-    </select>
-</label>
+    </div>
 </div>
 
+<!-- Locale Selector -->
+<div>
+    <label style="color:red">
+        Select your locale:
+    </label>
+    <div>
+        <TelerikComboBox Data="@CultureOptions"
+                         ValueField="Code"
+                         TextField="DisplayText"
+                         Placeholder="Select a locale..."
+                         ValueChanged="@(async (string code) => await ApplySelectedCultureAsync(code))" />
+    </div>
+</div>
 
 @code {
     // List of available Swatches
@@ -50,31 +50,34 @@
     }
 
     // List of Supported Cultures
+    private List<CultureOption> CultureOptions => SupportedCultures
+        .Select(c => new CultureOption { Code = c.Name, DisplayText = c.DisplayName })
+        .ToList();
+
     private CultureInfo[] SupportedCultures = new[]
-     {
+    {
         new CultureInfo("en-US"),
         new CultureInfo("bg-BG"),
         new CultureInfo("fr-FR"),
         new CultureInfo("it-IT"),
-         new CultureInfo("es-ES"),
-
+        new CultureInfo("es-ES"),
     };
 
     private CultureInfo? SelectedCulture;
 
     protected override void OnInitialized()
     {
-
         SelectedCulture = CultureInfo.CurrentCulture;
     }
 
-    private async Task ApplySelectedCultureAsync()
+    private async Task ApplySelectedCultureAsync(string selectedCode)
     {
+        var selectedCulture = SupportedCultures.FirstOrDefault(c => c.Name == selectedCode);
 
-        if (SelectedCulture != null && CultureInfo.CurrentCulture != SelectedCulture)
+        if (selectedCulture != null && CultureInfo.CurrentCulture != selectedCulture)
         {
+            SelectedCulture = selectedCulture;
             await JS.InvokeVoidAsync("blazorCulture.set", SelectedCulture.Name);
-
             Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
         }
     }
