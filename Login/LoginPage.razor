@@ -1,5 +1,5 @@
 ﻿@layout LoginLayout
-@page "/login"
+@page "/"
 
 @using System.Text
 @inject NavigationManager NavigationManager
@@ -13,7 +13,7 @@
         <h2>Welcome back!</h2>
 
         <form @onsubmit="HandleSubmit">
-            <label for="userId" class="form-label">Email</label>R
+            <label for="userId" class="form-label">Email</label>
             <TelerikTextBox Id="userId" Placeholder="Email" @bind-Value="@pcUser" Class="form-input" />
 
             <label for="password" class="form-label">Password</label>
@@ -147,7 +147,7 @@
 
     private async Task ValidarUsuario2()
     {
-        var endUrl = "http://192.168.10.46:8810/WebServices/rest/IntegraERP/Seguridad/Login";
+        var endUrl = "http://192.168.10.54:8810/WebServices/rest/IntegraERP/Seguridad/Login";
 
         using var client = new HttpClient();
 
@@ -176,13 +176,17 @@
 
 
         // Agregar encabezados necesarios
-    /*    client.DefaultRequestHeaders.Clear();
+        /*  */
+
+      //  client.DefaultRequestHeaders.Clear();
+        client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
             client.DefaultRequestHeaders.Add("User-Agent", "PostmanRuntime/7.43.0");
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             client.DefaultRequestHeaders.Add("Content-Lenght", "0");
             client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
             client.DefaultRequestHeaders.Add("Connection", "keep-alive");
-         */
+        client.DefaultRequestHeaders.Add("pcuser", pcUser);
+        
       //  request.SetBrowserRequestMode(BrowserRequestMode.NoCors);
         var response = await client.PostAsync(endUrl, null);
 
@@ -213,7 +217,7 @@
     }
     private async Task ValidarUsuario()
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "http://192.168.10.46:8810/WebServices/rest/IntegraERP/Seguridad/Login");
+        var request = new HttpRequestMessage(HttpMethod.Post, "http://192.168.10.54:8810/WebServices/rest/IntegraERP/Seguridad/Login");
         request.Headers.Add("pcUser", pcUser);
         request.Headers.Add("pcClave", pcClave);
 
