@@ -262,6 +262,15 @@
   <data name="Editor_Unlink" xml:space="preserve">
     <value>Remover enlace</value>
   </data>
+  <data name="FileManager_ConfirmDeleteText" xml:space="preserve">
+    <value>¿Está seguro de que quiere eliminar este registro?</value>
+  </data>
+  <data name="FileManager_ConfirmDeleteTitle" xml:space="preserve">
+    <value>Elimina</value>
+  </data>
+  <data name="FileManager_ContextMenu_Delete" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="Filter_AdditionalOperator" xml:space="preserve">
     <value>Operador adicional</value>
   </data>
@@ -424,6 +433,9 @@
   <data name="Grid_ConfirmDeleteText" xml:space="preserve">
     <value>¿Está seguro de que quiere eliminar este registro?</value>
   </data>
+  <data name="Grid_ConfirmDeleteTitle" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
   <data name="Grid_Create" xml:space="preserve">
     <value>Añadir</value>
   </data>
@@ -519,6 +531,9 @@
   </data>
   <data name="Scheduler_Cancel" xml:space="preserve">
     <value>Cancelar</value>
+  </data>
+  <data name="Scheduler_ConfirmDeleteText" xml:space="preserve">
+    <value>¿Está seguro de que quiere eliminar este registro?</value>
   </data>
   <data name="Scheduler_Day" xml:space="preserve">
     <value>Dia</value>
@@ -763,8 +778,17 @@
   <data name="TreeList_Cancel" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="TreeList_ConfirmDeleteCancel" xml:space="preserve">
+    <value>Anula</value>
+  </data>
+  <data name="TreeList_ConfirmDeleteOk" xml:space="preserve">
+    <value>Confirma</value>
+  </data>
   <data name="TreeList_ConfirmDeleteText" xml:space="preserve">
     <value>¿Está seguro de que quiere eliminar este registro?</value>
+  </data>
+  <data name="TreeList_ConfirmDeleteTitle" xml:space="preserve">
+    <value>Eliminar</value>
   </data>
   <data name="TreeList_Create" xml:space="preserve">
     <value>Añadir</value>
@@ -827,6 +851,12 @@
     <value>Media</value>
   </data>
   <data name="AIPrompt_OutputView_ButtonText" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Spreadsheet_Dialog_DeleteSheetText" xml:space="preserve">
+    <value>¿Está seguro de que quiere eliminar este registro?</value>
+  </data>
+  <data name="Spreadsheet_SheetsBar_DeleteSheet" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
   <data name="Bill_Create" xml:space="preserve">
