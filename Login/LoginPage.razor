@@ -1,5 +1,7 @@
-﻿@layout LoginLayout
+@layout LoginLayout
 @page "/"
+@using Newtonsoft.Json.Linq;
+
 
 @using System.Text
 @inject NavigationManager NavigationManager
@@ -10,7 +12,7 @@
         <img src="/imagen/logo.png" alt="Logo" class="logo" />
         <div class="avatar">
         </div>
-        <h2>Welcome back!</h2>
+        <h2>Bienvenido</h2>
 
         <form @onsubmit="HandleSubmit">
             <label for="userId" class="form-label">Email</label>
@@ -22,12 +24,6 @@
             {
                 <div class="alert alert-danger">@errorLogin</div>
             }
-            @if (!string.IsNullOrEmpty(errorLogin))
-            {
-                <div class="alert alert-danger">@errorLogin</div>
-            }
-
-
             <TelerikButton Id="commandSubmit" Icon="@SvgIcon.Login"  Class="btn-login">
                 Log in
             </TelerikButton>
@@ -43,7 +39,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url('/imagen/fondo.jpg') no-repeat center center fixed;
+    background: url('/imagen/fondo2.jpg') no-repeat center center fixed;
     background-size: cover;
     }
 
@@ -141,109 +137,46 @@
 
     private async Task HandleSubmit()
     {
-        await ValidarUsuario2();
+        await ValidarUsuario2(pcUser,pcClave);
     }
 
 
-    private async Task ValidarUsuario2()
+    private async Task ValidarUsuario2(string pcUser, string pcClave)
     {
-        var endUrl = "http://192.168.10.54:8810/WebServices/rest/IntegraERP/Seguridad/Login";
+        var endUrl = $"http://localhost:8810/WebServices/rest/IntegraERP/Seguridad/Login?pcUser={pcUser}&pcClave={pcClave}";
 
         using var client = new HttpClient();
 
-    /*    var request = new HttpRequestMessage(HttpMethod.Post, baseUrl);
-            request.Headers.Add("pcuser", pcUser);
-            request.Headers.Add("pcClave", pcClave);
-            request.Headers.Add("User-Agent", "PostmanRuntime/7.43.0");
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Lenght", "0");
-            request.Headers.Add("Accept-Encoding", "gzip, deflate, br");
-            request.Headers.Add("Connection", "keep-alive");
-           //   var response = await client.SendAsync(request);
-            // Crear el contenido del cuerpo (si es necesario)
-
-
-            client.DefaultRequestHeaders.Add("X-Requested-With", "XMLHttpRequest");
-            client.DefaultRequestHeaders.Add("Mode", "no-cors");
-            client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer YOUR_TOKEN");
-
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            client.DefaultRequestHeaders.Add("pcuser", pcUser);*/
-
-        // Console.WriteLine(request);
-       // var requestBody = new StringContent("", Encoding.UTF8, "application/json");
-
-
-        // Agregar encabezados necesarios
-        /*  */
-
-      //  client.DefaultRequestHeaders.Clear();
-        client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
-            client.DefaultRequestHeaders.Add("User-Agent", "PostmanRuntime/7.43.0");
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            client.DefaultRequestHeaders.Add("Content-Lenght", "0");
-            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
-            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
-        client.DefaultRequestHeaders.Add("pcuser", pcUser);
-        
-      //  request.SetBrowserRequestMode(BrowserRequestMode.NoCors);
+       
         var response = await client.PostAsync(endUrl, null);
 
         Console.WriteLine(response);
 
-       
-
-            // Realizar la solicitud POST
-          //  var response = await client.PostAsync(baseUrl, requestBody);
-         //   response.addHeader("Access-Control-Allow-Origin", "*");
-            Console.WriteLine(response);
-          //  var asd = 123;
-
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                Console.WriteLine("Respuesta del servidor:");
-                Console.WriteLine(content);
-                NavigationManager.NavigateTo("/counter");
-            }
-            else
-            {
-                Console.WriteLine($"Error: {response.StatusCode}");
-                Console.WriteLine(await response.Content.ReadAsStringAsync());
-                errorLogin = "Nombre de usuario o clave no son válidas";
-            }
-        
-    }
-    private async Task ValidarUsuario()
-    {
-        var request = new HttpRequestMessage(HttpMethod.Post, "http://192.168.10.54:8810/WebServices/rest/IntegraERP/Seguridad/Login");
-        request.Headers.Add("pcUser", pcUser);
-        request.Headers.Add("pcClave", pcClave);
-
-        
-        // Configurar el modo no-cors
-        var client = new HttpClient();
-        client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
-        client.DefaultRequestHeaders.Add("Accept", "application/json");
-        client.DefaultRequestHeaders.Add("Mode", "no-cors");
-
-        try
+        if (response.IsSuccessStatusCode)
         {
-            var response = await client.SendAsync(request);
-            if (response.IsSuccessStatusCode)
+            var content = await response.Content.ReadAsStringAsync();
+
+            var rootObject = JObject.Parse(content);
+
+            string estado = rootObject["dsIntegra"]?["ttEstados"]?[0]?["estado"]?.ToString();
+
+            if (estado == "Contraseña Incorrecta" || estado == "Usuario Incorrecto" || estado == "La Empresa no Existe" || estado == "EXPIRADO")
             {
-                // Aquí no podrás leer el contenido
-                NavigationManager.NavigateTo("/counter");
+                if (estado == "EXPIRADO"){
+                    errorLogin = "Su estado es: " + estado + ". Debe cambiar su clave";
+                }
+                else { errorLogin = estado; }
+                
+
             }
-            else
-            {
-                errorLogin = "Nombre de usuario o clave no son válidas.";
+            else {
+                NavigationManager.NavigateTo("/gridoe1");
             }
         }
-        catch (Exception ex)
+        else
         {
-            Console.WriteLine($"Error: {ex.Message}");
+            Console.WriteLine($"Error: {response.StatusCode}");
+            errorLogin = "Nombre de usuario o clave no son válidas";
         }
 
     }
