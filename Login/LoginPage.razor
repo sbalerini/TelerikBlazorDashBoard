@@ -1,5 +1,8 @@
 ﻿@layout LoginLayout
 @page "/"
+@using Newtonsoft.Json;
+@using BlazorOE01.Common.OE01;
+@using Newtonsoft.Json.Linq;
 
 @using System.Text
 @inject NavigationManager NavigationManager
@@ -18,10 +21,7 @@
 
             <label for="password" class="form-label">Password</label>
             <TelerikTextBox Id="password" Placeholder="Password" Password="true" @bind-Value="@pcClave" Class="form-input" />
-            @if (errorLogin != "")
-            {
-                <div class="alert alert-danger">@errorLogin</div>
-            }
+            
             @if (!string.IsNullOrEmpty(errorLogin))
             {
                 <div class="alert alert-danger">@errorLogin</div>
@@ -141,13 +141,15 @@
 
     private async Task HandleSubmit()
     {
-        await ValidarUsuario2();
+        await ValidarUsuario2(pcUser,pcClave);
     }
 
 
-    private async Task ValidarUsuario2()
+
+
+    private async Task ValidarUsuario2(string pcUser, string pcClave)
     {
-        var endUrl = "http://192.168.10.54:8810/WebServices/rest/IntegraERP/Seguridad/Login";
+        var endUrl = $"http://localhost:8810/WebServices/rest/IntegraERP/Seguridad/Login?pcUser={pcUser}&pcClave={pcClave}";
 
         using var client = new HttpClient();
 
@@ -176,9 +178,9 @@
 
 
         // Agregar encabezados necesarios
-        /*  */
+        /*  
 
-      //  client.DefaultRequestHeaders.Clear();
+      client.DefaultRequestHeaders.Clear();
         client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
             client.DefaultRequestHeaders.Add("User-Agent", "PostmanRuntime/7.43.0");
             client.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -186,7 +188,7 @@
             client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
             client.DefaultRequestHeaders.Add("Connection", "keep-alive");
         client.DefaultRequestHeaders.Add("pcuser", pcUser);
-        
+        */
       //  request.SetBrowserRequestMode(BrowserRequestMode.NoCors);
         var response = await client.PostAsync(endUrl, null);
 
@@ -203,9 +205,23 @@
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
+
+            var rootObject = JObject.Parse(content);
+
+            string estado = rootObject["dsIntegra"]?["ttEstados"]?[0]?["estado"]?.ToString();
+             
                 Console.WriteLine("Respuesta del servidor:");
+            Console.WriteLine(rootObject);
+            
                 Console.WriteLine(content);
+            Console.WriteLine(estado);
+            if ( estado == "Usuario o Contraseña Incorrecta" ) {
+                errorLogin = "Nombre de usuario o clave no son válidas";
+
+            }else {
                 NavigationManager.NavigateTo("/counter");
+
+            }
             }
             else
             {
@@ -217,7 +233,7 @@
     }
     private async Task ValidarUsuario()
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "http://192.168.10.54:8810/WebServices/rest/IntegraERP/Seguridad/Login");
+        var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:8810/WebServices/rest/IntegraERP/Seguridad/Login");
         request.Headers.Add("pcUser", pcUser);
         request.Headers.Add("pcClave", pcClave);
 
