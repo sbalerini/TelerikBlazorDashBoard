@@ -41,7 +41,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url('/imagen/fondo.jpg') no-repeat center center fixed;
+    background: url('/imagen/fondo2.jpg') no-repeat center center fixed;
     background-size: cover;
     }
 
@@ -216,10 +216,13 @@
                 errorLogin = "Nombre de usuario o clave no son válidas";
 
             }
-            else
+            else if (estado == "La Empresa no Existe")
             {
-                NavigationManager.NavigateTo("/counter");
+                errorLogin = "La Empresa no Existe";
 
+            }
+            else {
+                NavigationManager.NavigateTo("/gridoe1");
             }
         }
         else
