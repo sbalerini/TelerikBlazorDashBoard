@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-﻿﻿@layout LoginLayout
-=======
+
 @layout LoginLayout
->>>>>>> e5e3e0b038ca371721627e815b563cad09149349
 @page "/"
 @using Newtonsoft.Json.Linq;
 
@@ -43,85 +40,81 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-<<<<<<< HEAD
-    background: url('/imagen/fondo.png') no-repeat center center fixed;
-=======
     background: url('/imagen/fondo2.jpg') no-repeat center center fixed;
->>>>>>> e5e3e0b038ca371721627e815b563cad09149349
-    background-size: cover;
-    }
+        background-size: cover;
+        }
 
-    .login-card {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 350px;
-    }
+        .login-card {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 350px;
+        }
 
-    .logo {
-    width: 100px;
-    margin-bottom: 20px;
-    }
+        .logo {
+        width: 100px;
+        margin-bottom: 20px;
+        }
 
-    .avatar img {
-    width: 60px height: 60px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    }
+        .avatar img {
+        width: 60px height: 60px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        }
 
-    h2 {
-    font-family: Arial, sans-serif;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color: #333;
-    }
+        h2 {
+        font-family: Arial, sans-serif;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #333;
+        }
 
-    .form-label {
-    display: block;
-    text-align: left;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-    }
+        .form-label {
+        display: block;
+        text-align: left;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+        }
 
-    .form-input {
-    width: 100%;
-    margin-bottom: 20px;
-    }
+        .form-input {
+        width: 100%;
+        margin-bottom: 20px;
+        }
 
-    .btn-login {
-    width: 100%;
-    background-color: #5f1319;
-    color: white;
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: #7f0010;
-    text-transform: uppercase;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    }
+        .btn-login {
+        width: 100%;
+        background-color: #5f1319;
+        color: white;
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: #7f0010;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        }
 
-    .btn-login:hover {
-    background-color: #5f1319;
-    }
+        .btn-login:hover {
+        background-color: #5f1319;
+        }
 
-    .options {
-    margin-top: 15px;
-    }
+        .options {
+        margin-top: 15px;
+        }
 
-    .forgot-password,
-    .register-link {
-    color: #ff6b6b;
-    text-decoration: none;
-    font-size: 0.9rem;
-    }
+        .forgot-password,
+        .register-link {
+        color: #ff6b6b;
+        text-decoration: none;
+        font-size: 0.9rem;
+        }
 
-    .forgot-password:hover,
-    .register-link:hover {
-    text-decoration: underline;
-    }
+        .forgot-password:hover,
+        .register-link:hover {
+        text-decoration: underline;
+        }
 </style>
 @* 
 <AuthorizeView>
@@ -155,7 +148,7 @@
 
         using var client = new HttpClient();
 
-       
+
         var response = await client.PostAsync(endUrl, null);
 
         Console.WriteLine(response);
