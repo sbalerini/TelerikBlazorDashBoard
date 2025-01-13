@@ -149,7 +149,7 @@
 
     public async Task CreateHandler(GridCommandEventArgs args)
     {
-        string baseURL = "http://192.168.10.54:8093/Ordenes/rest/DEMOOE1Service/Invoice";
+        string baseURL = "http://localhost:8093/Ordenes/rest/DEMOOE1Service/Invoice";
         
 
         var arsItem = (Ttinvoice)args.Item;
@@ -186,7 +186,7 @@
 
     public async Task UpdateHandler(GridCommandEventArgs args)
     {
-        string baseURL = "http://192.168.10.54:8093/Ordenes/rest/DEMOOE1Service/Invoice";
+        string baseURL = "http://localhost:8093/Ordenes/rest/DEMOOE1Service/Invoice";
 
 
         var arsItem = (Ttinvoice)args.Item;
@@ -229,7 +229,7 @@
         int dr3 = arsItem.OrderNum;
         string cadena = dr.ToString();
 
-        string baseURL = $"http://192.168.10.54:8093/Ordenes/rest/DEMOOE1Service/Invoice?wId={dr}&wId2={dr2}&wId3={dr3}";
+        string baseURL = $"http://localhost:8093/Ordenes/rest/DEMOOE1Service/Invoice?wId={dr}&wId2={dr2}&wId3={dr3}";
 
         using (HttpClient httpClient = new HttpClient())
         {
@@ -263,7 +263,7 @@
 
         GenerateReport();
         List<Ttinvoice> ttInvoices = new();
-        string baseURL = "http://192.168.10.54:8093/Ordenes/rest/DEMOOE1Service/Invoice";
+        string baseURL = "http://localhost:8093/Ordenes/rest/DEMOOE1Service/Invoice";
 
 
         using (var http = new HttpClient())

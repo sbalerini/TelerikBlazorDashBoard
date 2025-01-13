@@ -1,4 +1,6 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using System.Net.Http.Json
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">BlazorOE01</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -7,29 +9,24 @@
     </div>
 </div>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="home" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="gridoe1">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Invoice
-            </NavLink>
-        </div>
-    </nav>
+<div class="@NavMenuCssClass nav-scrollable">
+    <ul>
+        @if (Menus != null)
+        {
+            foreach (var menu in Menus.Where(m => string.IsNullOrEmpty(m.ParentID)))
+            {
+                <li>
+                    <a href="@menu.Route">@menu.Name</a>
+                    @if (Menus.Any(m => m.ParentID == menu.Id))
+                    {
+                        <ul>
+                            @BuildSubMenu(menu.Id)
+                        </ul>
+                    }
+                </li>
+            }
+        }
+    </ul>
 </div>
 
 @code {
@@ -41,9 +38,82 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
+
+    public List<MenuInfo> Menus { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMenuData();
+    }
+
+    private async Task LoadMenuData()
+    {
+        string baseURL = "http://localhost:8810/WebServices/rest/IntegraERP/Seguridad/GetMenus?pcSessionID=uaj8ys68GL3RFBeEiDG/qw";
+        using (var http = new HttpClient())
+        {
+            var response = await http.GetAsync(baseURL);
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadFromJsonAsync<Rootobject>();
+                if (data != null && data.dsIntegra?.ttMenus != null)
+                {
+                    Menus = data.dsIntegra.ttMenus.ToList();
+                }
+
+            }
+        }
+    }
+
+    private RenderFragment BuildSubMenu(string parentId) => builder =>
+    {
+        var childMenus = Menus.Where(m => m.ParentID == parentId).ToList();
+        foreach (var child in childMenus)
+        {
+            builder.OpenElement(0, "li");
+            builder.OpenElement(1, "a");
+            builder.AddAttribute(2, "href", child.Route);
+            builder.AddContent(3, child.Name);
+            builder.CloseElement(); // Close <a>
+
+            if (Menus.Any(m => m.ParentID == child.Id))
+            {
+                builder.OpenElement(4, "ul");
+                builder.AddContent(5, BuildSubMenu(child.Id));
+                builder.CloseElement(); // Close <ul>
+            }
+
+            builder.CloseElement(); // Close <li>
+        }
+    };
+
+    public class Rootobject
+    {
+        public Dsgeneral dsIntegra { get; set; }
+    }
+
+    public class Dsgeneral
+    {
+        public MenuInfo[] ttMenus { get; set; }
+
+        public Ttestados[] ttestados { get; set; }
+    }
+
+
+    public class MenuInfo
+    {
+        public string Id { get; set; }
+        public string ParentID { get; set; }
+        public string Name { get; set; }
+
+        public string Route { get; set; }
+        public string Icon { get; set; }
+    }
+
+    public class Ttestados
+    {
+        public string Estado { get; set; }
+    }
 }
-
-
 
 
 
